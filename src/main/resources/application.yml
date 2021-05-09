@@ -1,0 +1,8 @@
+###
+# Properties locali al servizio (non in ConfigServer)
+###
+server:
+   port: 9080
+spring:
+  banner:
+    location: classpath:banner.txt

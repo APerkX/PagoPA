@@ -1,0 +1,8 @@
+###
+# Properties di configurazione
+###
+spring:
+  application:
+    name: PagoPAinterview
+  profiles:
+    active: default
