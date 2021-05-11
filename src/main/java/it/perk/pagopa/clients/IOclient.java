@@ -58,7 +58,7 @@ public class IOclient implements Serializable {
 		boolean output = false;
 		
 		try {
-			log.info("IOclient".concat(" - ").concat("getProfile()"));
+			log.info("getProfile()");
 			
 			// Build headers.
 			HttpHeaders headers = buildHeaders();
@@ -78,9 +78,9 @@ public class IOclient implements Serializable {
 			}
 			
 			
-			log.info("IOclient".concat(" - ").concat("getProfile()"));
+			log.info("getProfile()");
 		} catch (Exception e) {
-			log.error("IOclient".concat(" - ").concat("getProfile()"), e);
+			log.error("getProfile()", e);
 			throw new RuntimeException("", e);
 		}
 		
@@ -98,7 +98,7 @@ public class IOclient implements Serializable {
 		SubmitMessageforUserResponseDTO output = null;
 		
 		try {
-			log.info("IOclient".concat(" - ").concat("submitMessageforUser()"));
+			log.info("submitMessageforUser()");
 			
 			/*
 			 * Prevedere una verifica della request.
@@ -118,9 +118,9 @@ public class IOclient implements Serializable {
 				output = restExchange.getBody(); 
 			}
 
-			log.info("IOclient".concat(" - ").concat("submitMessageforUser()"));
+			log.info("submitMessageforUser()");
 		} catch (HttpClientErrorException e1) {
-			log.error("IOclient".concat(" - ").concat("getProfile()"), e1);
+			log.error("submitMessageforUser()", e1);
 			
 			if (HttpStatus.BAD_REQUEST.equals(e1.getStatusCode())) {
 				//TODO: prevedere il lancio di una eccezione adeguata e gestirla in questo catch e nel chiamante 
@@ -132,7 +132,7 @@ public class IOclient implements Serializable {
 			
 			throw new RuntimeException("", e1);
 		} catch (Exception e) {
-			log.error("IOclient".concat(" - ").concat("getProfile()"), e);
+			log.error("submitMessageforUser()", e);
 			throw new RuntimeException("", e);
 		}
 		
@@ -143,7 +143,7 @@ public class IOclient implements Serializable {
 		GetMessageResponseDTO output = null;
 		
 		try {
-			log.info("IOclient".concat(" - ").concat("getMessage()"));
+			log.info("getMessage()");
 			
 			// Build headers.
 			HttpHeaders headers = buildHeaders();
@@ -159,9 +159,9 @@ public class IOclient implements Serializable {
 			}
 
 			
-			log.info("IOclient".concat(" - ").concat("getMessage()"));
+			log.info("getMessage()");
 		} catch (Exception e) {
-			log.error("IOclient".concat(" - ").concat("getMessage()"), e);
+			log.error("getMessage()",e);
 			throw new RuntimeException("", e);
 		}
 		
