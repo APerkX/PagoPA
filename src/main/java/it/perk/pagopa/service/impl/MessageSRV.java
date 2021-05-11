@@ -4,14 +4,15 @@
 package it.perk.pagopa.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.stereotype.Service;
 
 import it.perk.pagopa.clients.IOclient;
 import it.perk.pagopa.clients.request.SubmitMessageforUserRequestDTO;
-import it.perk.pagopa.clients.response.GetMessageResponseDTO;
 import it.perk.pagopa.clients.response.SubmitMessageforUserResponseDTO;
+import it.perk.pagopa.controller.response.OutputMessageResponseDTO;
 import it.perk.pagopa.dto.ContentDTO;
+import it.perk.pagopa.dto.MessageDTO;
+import it.perk.pagopa.enums.MessageStateEnum;
 import it.perk.pagopa.service.IMessageSRV;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,8 +41,8 @@ public class MessageSRV implements IMessageSRV {
 	private IOclient ioClient;
 	
 	@Override
-	public GetMessageResponseDTO sendMessage() {
-		GetMessageResponseDTO output = null;
+	public OutputMessageResponseDTO sendMessage() {
+		OutputMessageResponseDTO output = null;
 		
 		try {
 			log.info("sendMessage()");
@@ -49,7 +50,6 @@ public class MessageSRV implements IMessageSRV {
 			// Costruzione del messaggio.
 			String subject = "IO sono l'oggetto"; //E IO sono il body - utile per i test con questo va in errore
 			String markdown = "# This is a markdown header\\n\\nto show how easily markdown can be converted to **HTML**\\n\\nRemember: this has to be a long text.";
-//			ContentDTO content = ContentDTO.builder().subject(subject).markdown(markdown).build();
 			ContentDTO content = new ContentDTO();
 			content.setSubject(subject);
 			content.setMarkdown(markdown);
@@ -65,21 +65,20 @@ public class MessageSRV implements IMessageSRV {
 	}
 
 	@Override
-	public GetMessageResponseDTO sendMessageToUser(ContentDTO content, String fiscalCode) {
-		GetMessageResponseDTO output = null;
+	public OutputMessageResponseDTO sendMessageToUser(ContentDTO content, String fiscalCode) {
+		OutputMessageResponseDTO output = null;
 		SubmitMessageforUserResponseDTO res = null;
 		
 		try {
 			log.info("sendMessageToUser()");
 			
-			/*
-			 * INVOCARE API getProfile() PER VERIFICARE SE L'UTENTE ESISTE ED è CONFIGURATO PER IL PROPRIO SERVIZIO.
-			 */
+			// Invocazione API getProfile() per verificare se l'utente
+			// esiste ed è configurato per ricevere messaggi da questo servizio.
 			boolean sendEnabled = ioClient.getProfile(fiscalCode);
 			
-			/*
-			 * DOPO AVER VERIFICATO LA CONFIGURAZIONE UTENTE INVIARE IL MESSAGGIO TRAMITE API submitMessageforUser().
-			 */
+			// Dopo aver configurato la configurato la configurazione utente
+			// viene invocata API submitMessageforUser() 
+			// per la creazione del messaggio sulla piattaforma IO.
 			if (sendEnabled) {
 				
 				// Costruzione della request nella sua interezza.
@@ -89,14 +88,23 @@ public class MessageSRV implements IMessageSRV {
 				res = ioClient.submitMessageforUser(req);
 				
 			} else {
-				//TODO: prevedere respnse consona per informare chi chiama che il fiscal code non è configurato per ricevere messaggi.
+
+				// Creazione response per dichiarare che l'utente non è configurato a ricevere messaggi.
+				MessageDTO mess = MessageDTO.builder().content(content).fiscal_code(fiscalCode).build();
+				String status = MessageStateEnum.USER_NOT_CONFIGURED.getStato();
+				output = OutputMessageResponseDTO.builder().message(mess).status(status).build();
+				
 			}
 			
-			/*
-			 * PER ULTIMO VERIFICARE CHE IL MESSAGGIO SIA STATO CORRETTAMENTE PROCESSATO INTERROGANDO L'API getMessage().
-			 */
+			// Verifica che il messaggio sia stato creato correttamente 
+			// e che sia stato restituito un identificativo.
 			if (res != null && res.getId() != null) {
-				output = ioClient.getMessage(fiscalCode, res.getId());
+				
+				// Creazione response positiva.
+				MessageDTO mess = MessageDTO.builder().content(content).fiscal_code(fiscalCode).id(res.getId()).build();
+				String status = MessageStateEnum.MSG_CREATED.getStato();
+				output = OutputMessageResponseDTO.builder().message(mess).status(status).build();
+				
 			}
 			
 			log.info("sendMessageToUser()");

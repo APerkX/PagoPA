@@ -6,6 +6,7 @@ package it.perk.pagopa.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -13,6 +14,7 @@ import lombok.Data;
  *
  */
 @Data
+@Builder
 public class MessageDTO implements Serializable {
 
 	/**

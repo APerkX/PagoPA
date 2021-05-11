@@ -5,7 +5,7 @@ package it.perk.pagopa.service.facade;
 
 import java.io.Serializable;
 
-import it.perk.pagopa.clients.response.GetMessageResponseDTO;
+import it.perk.pagopa.controller.response.OutputMessageResponseDTO;
 import it.perk.pagopa.dto.ContentDTO;
 
 /**
@@ -14,8 +14,8 @@ import it.perk.pagopa.dto.ContentDTO;
  */
 public interface IMessageFacadeSRV extends Serializable {
 	
-	GetMessageResponseDTO sendMessage();
+	OutputMessageResponseDTO sendMessage();
 	
-	GetMessageResponseDTO sendMessageToUser(ContentDTO message, String fiscalCode);
+	OutputMessageResponseDTO sendMessageToUser(ContentDTO message, String fiscalCode);
 
 }
