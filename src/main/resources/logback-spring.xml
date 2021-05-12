@@ -13,16 +13,16 @@
     </appender>
     
     <!-- Integrazione con Bugsnag -->
-<!--     <appender name="BUGSNAG" class="com.bugsnag.BugsnagAppender"> -->
-<!-- 	    <apiKey>7e308575bf15b28ea4fa61520b409079</apiKey> -->
-<!-- 	    <appType>spring</appType> -->
-<!-- 	    <appVersion>0.0.1-alpha</appVersion> -->
-<!-- 	    <releaseStage>development</releaseStage> -->
-<!-- 	</appender> -->
+    <appender name="BUGSNAG" class="com.bugsnag.BugsnagAppender">
+	    <apiKey>4b184afd7235916f856abdb5cd362b1a</apiKey>
+	    <appType>spring</appType>
+	    <appVersion>1.0.1</appVersion>
+	    <releaseStage>development</releaseStage>
+	</appender>
 
-<!-- 	<root level="INFO"> -->
-<!-- 	    <appender-ref ref="BUGSNAG"/> -->
-<!-- 	</root> -->
+	<root level="INFO">
+	    <appender-ref ref="BUGSNAG"/>
+	</root>
      
     <!-- LOG everything at INFO level -->
     <root level="INFO">

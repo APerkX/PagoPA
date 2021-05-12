@@ -34,7 +34,12 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.bugsnag</groupId>
+			<version>[3.0,4.0)</version>
+			<artifactId>bugsnag-spring</artifactId>
+		</dependency>		
 		<!-- TEST -->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
