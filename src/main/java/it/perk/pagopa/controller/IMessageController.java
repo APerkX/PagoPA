@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.perk.pagopa.clients.response.GetMessageResponseDTO;
+import it.perk.pagopa.controller.response.OutputMessageResponseDTO;
+
 /**
  * @author AndreaPerquoti
  *
@@ -17,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface IMessageController {
 
 	@PostMapping("/submit")
-	ResponseEntity<Long> submitMessage();
+	ResponseEntity<OutputMessageResponseDTO> submitMessage();
 	
 	@PostMapping("/submit/{fiscal_code}")
-	ResponseEntity<Long> submitMessageTo(@RequestBody Object message, @PathVariable(required = true, name = "fiscal_code") String fiscalCode);
+	ResponseEntity<OutputMessageResponseDTO> submitMessageTo(@RequestBody Object message, @PathVariable(required = true, name = "fiscal_code") String fiscalCode);
 
 }

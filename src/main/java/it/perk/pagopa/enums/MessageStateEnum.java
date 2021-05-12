@@ -17,7 +17,12 @@ public enum MessageStateEnum {
 	/**
 	 * Utente non configurato.
 	 */
-	USER_NOT_CONFIGURED(2, "UTENTE NON ABILITATO A RICEVERE MESSAGGI");
+	USER_NOT_CONFIGURED(2, "UTENTE NON ABILITATO A RICEVERE MESSAGGI"),
+	
+	/**
+	 * Utente non configurato.
+	 */
+	BAD_REQUEST_IO(3, "LA PIATTAFORMA IO API HA RESTITUITO UNA BAD_REQUEST");
 
 	/**
 	 * Identificativo.

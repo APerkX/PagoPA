@@ -21,6 +21,8 @@ import it.perk.pagopa.clients.request.SubmitMessageforUserRequestDTO;
 import it.perk.pagopa.clients.response.GetMessageResponseDTO;
 import it.perk.pagopa.clients.response.GetProfileResponseDTO;
 import it.perk.pagopa.clients.response.SubmitMessageforUserResponseDTO;
+import it.perk.pagopa.exceptions.BusinessException;
+import it.perk.pagopa.exceptions.ResourceBadRequestException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -80,8 +82,8 @@ public class IOclient implements Serializable {
 			
 			log.info("getProfile()");
 		} catch (Exception e) {
-			log.error("getProfile()", e);
-			throw new RuntimeException("", e);
+			log.error("Errore durante l'invocazione dell' API getProfile(). ", e);
+			throw new BusinessException("Errore durante l'invocazione dell' API getProfile(). ", e);
 		}
 		
 		return output;
@@ -120,20 +122,22 @@ public class IOclient implements Serializable {
 
 			log.info("submitMessageforUser()");
 		} catch (HttpClientErrorException e1) {
-			log.error("submitMessageforUser()", e1);
-			
+			String msg = null;
 			if (HttpStatus.BAD_REQUEST.equals(e1.getStatusCode())) {
-				//TODO: prevedere il lancio di una eccezione adeguata e gestirla in questo catch e nel chiamante 
+				msg = "Errore durante l'invocazione dell' API submitMessageforUser(). Il sistema ha resittuito una BAD_REQUEST. ";
+				log.error(msg, e1);
+				throw new ResourceBadRequestException(msg, e1);
 			}
 
 			if (HttpStatus.INTERNAL_SERVER_ERROR.equals(e1.getStatusCode())) {
-				//TODO: prevedere il lancio di una eccezione adeguata e gestirla in questo catch e nel chiamante 
+				msg = "Errore durante l'invocazione dell' API submitMessageforUser(). Il sistema ha resittuito una INTERNAL_SERVER_ERROR. ";
+				log.error(msg, e1);
+				throw new BusinessException(msg, e1);
 			}
 			
-			throw new RuntimeException("", e1);
 		} catch (Exception e) {
-			log.error("submitMessageforUser()", e);
-			throw new RuntimeException("", e);
+			log.error("Errore durante l'invocazione dell' API submitMessageforUser(). ", e);
+			throw new BusinessException("Errore durante l'invocazione dell' API submitMessageforUser(). ", e);
 		}
 		
 		return output;
@@ -157,7 +161,6 @@ public class IOclient implements Serializable {
 			if (HttpStatus.OK.equals(restExchange.getStatusCode()) && restExchange.getBody() != null) {
 				output = restExchange.getBody(); 
 			}
-
 			
 			log.info("getMessage()");
 		} catch (Exception e) {

@@ -13,6 +13,8 @@ import it.perk.pagopa.controller.response.OutputMessageResponseDTO;
 import it.perk.pagopa.dto.ContentDTO;
 import it.perk.pagopa.dto.MessageDTO;
 import it.perk.pagopa.enums.MessageStateEnum;
+import it.perk.pagopa.exceptions.BusinessException;
+import it.perk.pagopa.exceptions.ResourceBadRequestException;
 import it.perk.pagopa.service.IMessageSRV;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,16 +51,19 @@ public class MessageSRV implements IMessageSRV {
 			
 			// Costruzione del messaggio.
 			String subject = "IO sono l'oggetto"; //E IO sono il body - utile per i test con questo va in errore
-			String markdown = "# This is a markdown header\\n\\nto show how easily markdown can be converted to **HTML**\\n\\nRemember: this has to be a long text.";
+			String markdown = "CIAO";
 			ContentDTO content = new ContentDTO();
 			content.setSubject(subject);
 			content.setMarkdown(markdown);
 			
 			output = sendMessageToUser(content, FISCAL_CODE_DEFAULT);
 			
+		} catch (ResourceBadRequestException e) {
+			log.error(e.getMessage());
+			throw new ResourceBadRequestException(e);
 		} catch (Exception e) {
-			log.error("sendMessage()", e);
-			throw new RuntimeException("", e);
+			log.error("Errore durante il tentativo di inviare un messaggio standard. ", e);
+			throw new BusinessException("Errore durante il tentativo di inviare un messaggio standard. ", e);
 		}
 		
 		return output;
@@ -108,9 +113,12 @@ public class MessageSRV implements IMessageSRV {
 			}
 			
 			log.info("sendMessageToUser()");
+		} catch (ResourceBadRequestException e) {
+			log.error(e.getMessage());
+			throw new ResourceBadRequestException(e);
 		} catch (Exception e) {
-			log.error("sendMessageToUser()", e);
-			throw new RuntimeException("", e);
+			log.error("Errore durante l'invocazione delle API IO. ", e);
+			throw new BusinessException("Errore durante l'invocazione delle API IO. ", e);
 		}
 		
 		return output;
