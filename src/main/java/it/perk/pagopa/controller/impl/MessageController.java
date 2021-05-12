@@ -62,10 +62,4 @@ public class MessageController extends AbstractController implements IMessageCon
 		return output;
 	}
 
-	@Override
-	public ResponseEntity<OutputMessageResponseDTO> submitMessageTo(final Object message, final String fiscalCode) {
-		// TODO Auto-generated method stub #### @Pattern(regexp = "[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]")
-		return null;
-	}
-
 }

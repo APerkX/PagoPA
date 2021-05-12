@@ -51,7 +51,7 @@ public class MessageSRV implements IMessageSRV {
 			
 			// Costruzione del messaggio.
 			String subject = "IO sono l'oggetto"; //E IO sono il body - utile per i test con questo va in errore
-			String markdown = "CIAO";
+			String markdown = "# This is a markdown header\\n\\nto show how easily markdown can be converted to **HTML**\\n\\nRemember: this has to be a long text.";
 			ContentDTO content = new ContentDTO();
 			content.setSubject(subject);
 			content.setMarkdown(markdown);

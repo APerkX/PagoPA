@@ -35,11 +35,25 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- BUGSNAG -->		
 		<dependency>
 			<groupId>com.bugsnag</groupId>
 			<version>[3.0,4.0)</version>
 			<artifactId>bugsnag-spring</artifactId>
-		</dependency>		
+		</dependency>
+		
+		<!-- SPRINGDOC -->		
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>1.5.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>1.5.2</version>
+		</dependency>	
+			
 		<!-- TEST -->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
