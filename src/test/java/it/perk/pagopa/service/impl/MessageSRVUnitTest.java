@@ -34,7 +34,6 @@ import it.perk.pagopa.service.facade.IMessageFacadeSRV;
 @SpringBootTest(classes = MessageSRV.class)
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test") 
-@AutoConfigureMockMvc
 @DisplayName("Message Service Unit Test")
 class MessageSRVUnitTest {
 	

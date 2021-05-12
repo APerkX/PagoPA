@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
  * @author Perk
  *
  */
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest()
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 @DisplayName("Application")
