@@ -1,3 +1,5 @@
+![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=it.perk%3APagoPA&metric=alert_status)
+
 # PagoPA Client
 
 Questo repository contiene un client che implemeta l'invocazione delle IO API con l'obbiettivo di simulare l'invio di un messaggio a un cittadino italiano. 
