@@ -8,7 +8,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @Data

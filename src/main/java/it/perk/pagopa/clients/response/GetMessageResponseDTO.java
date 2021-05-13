@@ -10,7 +10,7 @@ import it.perk.pagopa.dto.NotificationDTO;
 import lombok.Data;
 
 /**
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @Data

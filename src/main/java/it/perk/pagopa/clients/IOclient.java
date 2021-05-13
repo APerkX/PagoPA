@@ -26,8 +26,9 @@ import it.perk.pagopa.exceptions.ResourceBadRequestException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Perk
+ * The Class IOclient.
  *
+ * @author AndreaPerquoti
  */
 @Slf4j
 @Component
@@ -38,9 +39,7 @@ public class IOclient implements Serializable {
 	 */
 	private static final long serialVersionUID = 8025733168019974704L;
 	
-	/**
-	 * URL base per IO API
-	 */
+	/** URL base per IO API. */
 	private static final String IO_BASE_URL = "https://api.io.italia.it/api/v1";
 	
 	/**
@@ -52,8 +51,8 @@ public class IOclient implements Serializable {
 	/**
 	 * Invoca l'endpoint {@code getProfile} fornita da IO REST API e permette di determinare se l'utente
 	 * target(fiscalCode) è sottoscritto al servizioche effettua la chiamata e quindi è abilitato a ricevere messaggi.
-	 * 
-	 * @param fiscalCode
+	 *
+	 * @param fiscalCode the fiscal code
 	 * @return true se l'utente è configurato per ricevere messaggi, false altrimenti.
 	 */
 	public boolean getProfile(final String fiscalCode) {
@@ -71,16 +70,26 @@ public class IOclient implements Serializable {
 			ResponseEntity<GetProfileResponseDTO> restExchange = rt.exchange(endpoint, HttpMethod.GET, entity, GetProfileResponseDTO.class, fiscalCode);
 			
 			// Gestione response
-			if (HttpStatus.OK.equals(restExchange.getStatusCode()) && restExchange.getBody() != null) {
-				output = restExchange.getBody().isSender_allowed(); 
+			GetProfileResponseDTO body = restExchange.getBody();
+			if (HttpStatus.OK.equals(restExchange.getStatusCode()) && body != null) {
+				output = body.isSender_allowed(); 
 			}
-			
-			if (HttpStatus.NOT_FOUND.equals(restExchange.getStatusCode()) && restExchange.getBody() != null) {
-				//TODO: prevedere il lancio di una eccezione adeguata e gestirla in questo catch e nel chiamante 
-			}
-			
 			
 			log.info("getProfile()");
+		} catch (HttpClientErrorException e1) {
+			String msg = null;
+			if (HttpStatus.BAD_REQUEST.equals(e1.getStatusCode())) {
+				msg = "Errore durante l'invocazione dell' API getProfile(). Il sistema ha resittuito una BAD_REQUEST. ";
+				log.error(msg, e1);
+				throw new ResourceBadRequestException(msg, e1);
+			}
+
+			if (HttpStatus.INTERNAL_SERVER_ERROR.equals(e1.getStatusCode())) {
+				msg = "Errore durante l'invocazione dell' API getProfile(). Il sistema ha resittuito una INTERNAL_SERVER_ERROR. ";
+				log.error(msg, e1);
+				throw new BusinessException(msg, e1);
+			}
+			
 		} catch (Exception e) {
 			log.error("Errore durante l'invocazione dell' API getProfile(). ", e);
 			throw new BusinessException("Errore durante l'invocazione dell' API getProfile(). ", e);
@@ -92,8 +101,8 @@ public class IOclient implements Serializable {
 	/**
 	 * Invoca l'endpoint {@code submitMessageforUser} fornita da IO REST API e permette di creare e inviare un messaggio
 	 * all'utente target che è regolarmette sottoscritto al servizio che richiede l'invio.
-	 * 
-	 * @param message
+	 *
+	 * @param message the message
 	 * @return identificativo del messaggio creato.
 	 */
 	public SubmitMessageforUserResponseDTO submitMessageforUser(final @Valid SubmitMessageforUserRequestDTO message) {
@@ -143,6 +152,13 @@ public class IOclient implements Serializable {
 		return output;
 	}
 	
+	/**
+	 * Gets the message.
+	 *
+	 * @param fiscalCode the fiscal code
+	 * @param idMessage the id message
+	 * @return the message
+	 */
 	public GetMessageResponseDTO getMessage(final String fiscalCode, final String idMessage) {
 		GetMessageResponseDTO output = null;
 		
@@ -173,6 +189,9 @@ public class IOclient implements Serializable {
 	
 	/**
 	 * Builder endpoint IO API.
+	 *
+	 * @param endpoint the endpoint
+	 * @return the string
 	 */
 	private String buildEndpoint(final String endpoint) {
 		// Build dell'endpoint da invocare.
@@ -183,6 +202,8 @@ public class IOclient implements Serializable {
 	
 	/**
 	 * Build header necessario per l'Autenticazione del servizio chiamante.
+	 *
+	 * @return the http headers
 	 */
 	private HttpHeaders buildHeaders() {
 		HttpHeaders headers = new HttpHeaders();

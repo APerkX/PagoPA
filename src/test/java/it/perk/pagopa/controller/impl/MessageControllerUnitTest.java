@@ -30,7 +30,7 @@ import it.perk.pagopa.dto.MessageDTO;
 import it.perk.pagopa.service.facade.IMessageFacadeSRV;
 
 /**
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.context.WebApplicationContext;
 
 /**
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @SpringBootTest()

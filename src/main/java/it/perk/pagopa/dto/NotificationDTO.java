@@ -9,7 +9,7 @@ import it.perk.pagopa.enums.NotificationChannelStatusValueEnum;
 import lombok.Data;
 
 /**
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @Data

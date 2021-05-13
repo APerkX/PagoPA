@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Eccezione di business.
  * 
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)

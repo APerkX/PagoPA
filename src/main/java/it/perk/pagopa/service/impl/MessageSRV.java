@@ -19,8 +19,9 @@ import it.perk.pagopa.service.IMessageSRV;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Perk
+ * The Class MessageSRV.
  *
+ * @author AndreaPerquoti
  */
 @Slf4j
 @Service
@@ -31,9 +32,7 @@ public class MessageSRV implements IMessageSRV {
 	 */
 	private static final long serialVersionUID = 4753457529053563796L;
 	
-	/**
-	 * URL base per IO API
-	 */
+	/** FIscal code base per IO API. */
 	private static final String FISCAL_CODE_DEFAULT = "AAAAAA00A00A000A";
 	
 	/**
@@ -42,6 +41,11 @@ public class MessageSRV implements IMessageSRV {
 	@Autowired
 	private IOclient ioClient;
 	
+	/**
+	 * Send message.
+	 *
+	 * @return the output message response DTO
+	 */
 	@Override
 	public OutputMessageResponseDTO sendMessage() {
 		OutputMessageResponseDTO output = null;
@@ -69,6 +73,13 @@ public class MessageSRV implements IMessageSRV {
 		return output;
 	}
 
+	/**
+	 * Send message to user.
+	 *
+	 * @param content the content
+	 * @param fiscalCode the fiscal code
+	 * @return the output message response DTO
+	 */
 	@Override
 	public OutputMessageResponseDTO sendMessageToUser(ContentDTO content, String fiscalCode) {
 		OutputMessageResponseDTO output = null;

@@ -18,12 +18,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import it.perk.pagopa.controller.response.OutputMessageResponseDTO;
 
 /**
- * @author AndreaPerquoti
+ * The Interface IMessageController.
  *
+ * @author AndreaPerquoti
  */
 @RequestMapping(value = "/api/v1/message")
 public interface IMessageController {
 
+	/**
+	 * Submit message.
+	 *
+	 * @return the response entity
+	 */
 	@PostMapping("/submit")
 	@Operation(summary = "Invio messaggio", description = "Servizio che invia un messaggio attraverso le IO API.")
 	@ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = OutputMessageResponseDTO.class)))

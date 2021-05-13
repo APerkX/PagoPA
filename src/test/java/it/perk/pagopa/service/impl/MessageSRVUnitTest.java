@@ -28,7 +28,7 @@ import it.perk.pagopa.enums.MessageStateEnum;
 import it.perk.pagopa.service.facade.IMessageFacadeSRV;
 
 /**
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @SpringBootTest(classes = MessageSRV.class)

@@ -27,4 +27,4 @@ Attendere l'avvio, dopodiché aprire un'altra finestra del terminale e lanciare 
 
 > curl -X POST "http://localhost:9080/api/v1/message/submit"
  
-e attendere la risposta positiva dal sistema
+e attendere la risposta positiva dal sistema.

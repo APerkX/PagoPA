@@ -26,7 +26,7 @@ import it.perk.pagopa.exceptions.ResourceBadRequestException;
  * Questa classe rappresenta un esempio di come gestire eccezioni dei servizi
  * rest a livello "globale" di applicazione
  * 
- * @author Perk
+ * @author AndreaPerquoti
  */
 @ControllerAdvice
 public class EntityExceptionHandler extends ResponseEntityExceptionHandler {

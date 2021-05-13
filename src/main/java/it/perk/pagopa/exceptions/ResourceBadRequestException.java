@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Eccezione generica per le richieste non consentite.
  * HTTP STATUS CODE: {@code 400 Bad Request}.
  * 
- * @author Perk
+ * @author AndreaPerquoti
  *
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)

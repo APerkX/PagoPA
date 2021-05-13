@@ -4,8 +4,9 @@
 package it.perk.pagopa.enums;
 
 /**
- * @author Perk
+ * The Enum MessageStateEnum.
  *
+ * @author AndreaPerquoti
  */
 public enum MessageStateEnum {
 	
@@ -34,12 +35,20 @@ public enum MessageStateEnum {
 	 */
 	private String stato;
 
+	/**
+	 * Instantiates a new message state enum.
+	 *
+	 * @param inId the in id
+	 * @param inStato the in stato
+	 */
 	MessageStateEnum(final Integer inId, final String inStato) {
 		id = inId;
 		stato = inStato;
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -47,6 +56,8 @@ public enum MessageStateEnum {
 	}
 
 	/**
+	 * Gets the stato.
+	 *
 	 * @return the stato
 	 */
 	public String getStato() {

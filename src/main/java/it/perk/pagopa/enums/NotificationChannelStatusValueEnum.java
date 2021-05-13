@@ -4,8 +4,9 @@
 package it.perk.pagopa.enums;
 
 /**
- * @author Perk
+ * The Enum NotificationChannelStatusValueEnum.
  *
+ * @author AndreaPerquoti
  */
 public enum NotificationChannelStatusValueEnum {
 

@@ -16,8 +16,9 @@ import it.perk.pagopa.service.facade.IMessageFacadeSRV;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Perk
+ * The Class MessageController.
  *
+ * @author AndreaPerquoti
  */
 @Slf4j
 @RestController
@@ -34,6 +35,11 @@ public class MessageController extends AbstractController implements IMessageCon
 	@Autowired
 	private IMessageFacadeSRV messageSRV;
 
+	/**
+	 * Submit message.
+	 *
+	 * @return the response entity
+	 */
 	@Override
 	public ResponseEntity<OutputMessageResponseDTO> submitMessage() {
 		ResponseEntity<OutputMessageResponseDTO> output = null;
